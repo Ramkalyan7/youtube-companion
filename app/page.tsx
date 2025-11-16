@@ -297,7 +297,7 @@ export default function Home() {
 
                     {replies.length > 0 && (
                       <div className="ml-6 border-l-2 pl-4 space-y-2">
-                        {replies.map((reply) => (
+                        {replies.map((reply:any) => (
                           <div key={reply.id} className="bg-white p-2 rounded shadow-sm">
                             <p dangerouslySetInnerHTML={{ __html: reply.snippet.textDisplay }} />
                             <button

@@ -75,7 +75,6 @@ export async function updateVideoMetadata(
   videoId: string,
   title: string,
   description: string,
-  categoryId: string
 ) {
   const client = createYouTubeClient(accessToken);
 

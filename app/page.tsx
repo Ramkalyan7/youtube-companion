@@ -24,7 +24,6 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // Fetch video details, comments, and notes when token or videoId change
   useEffect(() => {
     if (!accessToken || !videoId) {
       setVideoDetails(null);
@@ -57,7 +56,6 @@ export default function Home() {
       .finally(() => setLoading(false));
   }, [accessToken, videoId]);
 
-  // Comment handlers
   async function handleAddComment() {
     if (!commentInput.trim()) return;
     setLoading(true);

@@ -1,10 +1,12 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+YouTube Companion Dashboard
+This is a Next.js project bootstrapped with create-next-app.
 
-## Getting Started
+Manage your YouTube videos with ease by updating metadata, managing comments, and keeping notes, all integrated with YouTube Data API and a backend database.
 
+Getting Started
 First, run the development server:
 
-```bash
+bash
 npm run dev
 # or
 yarn dev
@@ -12,25 +14,50 @@ yarn dev
 pnpm dev
 # or
 bun dev
-```
+Open http://localhost:3000 with your browser to see the app.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+You can start editing the page by modifying app/page.tsx. The page auto-updates as you edit the file.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
+API Endpoints
+Notes API
+Method	Endpoint	Purpose	Request Body / Query Parameters
+GET	/api/notes	Fetch notes of a video	Query: videoId (string, required)
+POST	/api/notes	Add note for a video	JSON: { videoId: string, content: string }
+Events API
+Method	Endpoint	Purpose	Request Body
+POST	/api/events	Log user actions & events	JSON: { eventType: string, videoId?: string, commentId?: string, userId?: string, timestamp: string, details?: object }
+Database Schema (PostgreSQL + Prisma)
+Note Table
+Field	Type	Description
+id	Int (PK)	Primary key, auto-increment
+videoId	String	YouTube video ID
+content	Text	Note content
+createdAt	DateTime	Auto-created timestamp
+updatedAt	DateTime	Auto-updated timestamp
+EventLog Table
+Field	Type	Description
+id	Int (PK)	Primary key, auto-increment
+eventType	String	Event type (e.g., comment_added)
+videoId	String?	Related YouTube video ID (optional)
+commentId	String?	Related comment ID (optional)
+userId	String?	User associated with event (optional)
+timestamp	DateTime	Event occurrence time
+details	JSON?	Additional event data
+Learn More
 To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Next.js Documentation - learn about Next.js features and APIs.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Learn Next.js - an interactive Next.js tutorial.
 
-## Deploy on Vercel
+YouTube Data API - official YouTube API documentation.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Deploy on Vercel
+The easiest way to deploy your Next.js app is to use the Vercel Platform.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+See the Next.js deployment documentation for more details.
+
+Environment Variables
+DATABASE_URL — PostgreSQL connection string for Prisma
+
+YouTube OAuth credentials if applicable
